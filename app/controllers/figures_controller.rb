@@ -14,25 +14,25 @@ class FiguresController < ApplicationController
 
     post "/figures" do
       #create figure
-      figure = Figure.create(name: params["figure_name"])
+      figure = Figure.create(name: params["figure"]["name"])
 
       #associate ticked titles with figure
-      if params["title_ids"] != nil
-        array_titles = params["title_ids"]
+      if params["figure"]["title_ids"] != nil
+        array_titles = params["figure"]["title_ids"]
         array_titles.each {|title_id| figure.titles << Title.find(title_id)}
       end
       #create new title and associate with figure if new title filled
-      if params["title_name"] != nil
-        new_title = Title.create(name: params["title_name"])
+      if params["title"]["name"] != nil
+        new_title = Title.create(name: params["title"]["name"])
       end
       #associate ticked landmarks with figure
-      if params["landmark_ids"] != nil
-        array_landmarks = params["landmark_ids"]
+      if params["figure"]["landmark_ids"].length > 0
+        array_landmarks = params["figure"]["landmark_ids"]
         array_landmarks.each {|landmark_id| figure.landmarks << Landmark.find(landmark_id)}
       end
       #create new landmark and associate with figure if new title filled
-      if params["landmark_name"] != nil
-        new_landmark = Landmark.create(name: params["landmark_name"], year_completed: params["year_completed"])
+      if params["landmark"]["name"] != nil
+        Landmark.create(name: params["landmark"]["name"], year_completed: params["landmark"]["year_completed"], figure_id: figure.id)
       end
 
       redirect "/figures/#{figure.id}"
