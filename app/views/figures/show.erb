@@ -8,3 +8,16 @@
 
   </tr>
 <table>
+
+<ul>
+ <%@titles.each do |title| %>
+  <li><%=title.name%></li>
+  <%end%>
+</ul>
+
+
+<ul>
+ <%@landmarks.each do |landmark| %>
+  <li><%=landmark.name%></li>
+  <%end%>
+</ul>

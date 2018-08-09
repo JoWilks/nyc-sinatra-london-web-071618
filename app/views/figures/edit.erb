@@ -15,7 +15,10 @@
           <% @titles.each do |title| %>
                 <div>
                   <input type="checkbox" id="title_<%= title.id %>" name = "figure[title_ids][]"
-                         value="<%= title.id %>" />
+                         value="<%= title.id %>"
+                         <% if @figure.titles.include?(title) %>
+                         checked
+                         <%end%> />
                   <label for="title-<%= title.id %>"><%= title.name %></label>
 
                 </div>
@@ -33,7 +36,10 @@
                 <% @landmarks.each do |landmark| %>
                       <div>
                         <input type="checkbox" id="landmark_<%= landmark.id %>" name = "figure[landmark_ids][]"
-                               value="<%= landmark.id %>" />
+                               value="<%= landmark.id %>"
+                               <% if @figure.landmarks.include?(landmark) %>
+                               checked
+                               <%end%>/>
                         <label for="landmark-<%= landmark.id %>"><%= landmark.name %></label>
 
                       </div>
